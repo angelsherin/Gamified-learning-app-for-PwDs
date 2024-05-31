@@ -1,0 +1,50 @@
+{% include 'user_header.html' %}
+
+<center>
+    <h1 style="padding:40px;font-size: 20px;font-weight: bold;color: #FFF;"><i>Attend Quiz</i></h1>
+</center>
+
+
+<div class="container" style="margin:0 auto;width: 80%;">
+    <form method="post" id="invoice_form">
+        {% csrf_token %}
+        <input type="hidden" name="random_num" value="{{num}}">
+        {% for i in question %}
+        <input type="hidden" name="question_id" value="{{i.id}}">
+        <div class="row">
+            <div class="form-group">
+
+                <label>{{forloop.counter}}) {{i.question}}</label><br>
+                <input type="checkbox" name="answer" value="{{i.option1}}" onclick="limitCheckbox(this)"> {{i.option1}} <br>
+                <input type="checkbox" name="answer" value="{{i.option2}}" onclick="limitCheckbox(this)"> {{i.option2}} <br>
+                <input type="checkbox" name="answer" value="{{i.option3}}" onclick="limitCheckbox(this)"> {{i.option3}} <br>
+                <input type="checkbox" name="answer" value="{{i.option4}}" onclick="limitCheckbox(this)"> {{i.option4}} <br>
+
+            </div>
+        </div>
+        {% endfor %}
+        <input type="submit" value="Submit" class="btn btn-success">
+    </form>
+</div>
+
+<script>
+    function limitCheckbox(checkbox) {
+        var checkboxes = document.getElementsByName("answer");
+        var index = Array.prototype.indexOf.call(checkboxes, checkbox);
+        var numCols = 4; // Assuming 4 options per question
+
+        // Disable other checkboxes in the same row
+        for (var i = index - (index % numCols); i < index - (index % numCols) + numCols; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].disabled = checkbox.checked;
+            }
+        }
+
+        // Enable corresponding checkbox in the next row
+        if (index < checkboxes.length - numCols) {
+            for (var i = index + numCols; i < checkboxes.length; i += numCols) {
+                checkboxes[i].disabled = !checkbox.checked;
+            }
+        }
+    }
+</script>

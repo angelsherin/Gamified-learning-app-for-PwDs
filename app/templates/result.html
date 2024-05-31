@@ -1,0 +1,22 @@
+{% include 'user_header.html' %}
+{% load static %}
+
+<style type="text/css">
+    body
+    {
+        background:url('{% static 'images/1.gif' %}') !important;background-size: 100%;
+    }
+</style>
+<center><h1 style="padding:40px;font-size: 20px;font-weight: bold;color: #FFF;"><i>
+</i></h1></center>
+
+ <div class="container" style="margin:0 auto;width: 80%;background: #76ABAE;padding: 20px;" >
+	{% for i in row %}
+		<h2>Congratulations !!!! You have Scored  {{i.0}}/20</h2>
+		{% if i.0 > 7 %}
+		<h2>Result: <span style="color:green;">Pass</span></h2>
+		{% else %}
+		<h2>Result: <span style="color:red;">Fail</span></h2>
+		{% endif %}
+	{% endfor %}
+</div>

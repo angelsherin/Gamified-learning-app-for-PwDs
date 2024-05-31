@@ -1,0 +1,32 @@
+{% include 'user_header.html' %}
+{% load static %}
+<style type="text/css">
+    body
+    {
+        background:url('{% static 'images/1.gif' %}') !important;background-size: 100%;
+    }
+</style>
+<center><h1 style="padding:40px;font-size: 20px;font-weight: bold;color: #FFF;"><i>Top Scorer 
+</i></h1></center>
+
+ <div class="container" style="margin:0 auto;width: 80%;background: #76ABAE;padding: 20px;" >
+	<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title" style="font-size:20px;">Top Scorer</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if top_scorer %}
+                            <h4 class="card-text">User Name: {{ top_scorer }} with a score of {{ top_score }} / 20</h4>
+                        {% else %}
+                            <p class="card-text">No users found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
